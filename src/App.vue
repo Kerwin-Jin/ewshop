@@ -8,26 +8,15 @@
       <router-link to="/shopcart" active-class="active"><i class="iconfont icon-qicheqianlian-select"></i><div>购物车</div></router-link>
       <router-link to="/profile" active-class="active"><i class="iconfont icon-gerenzhongxin-zhong"></i><div>我的</div></router-link>
     </div>
-    
   </div>
 </template>
 
 <style lang="scss">
-@import url("https://at.alicdn.com/t/font_2535714_m6bcjemxoh.css");
+@import url("https://at.alicdn.com/t/font_2535714_8wk2ax3f9sx.css");
 @import './assets/css/base.css';
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
 
-#nav {
-  padding: 30px;
-}
 .active{
-  color: #f40;
+  color: var(--color-tint);
 }
 #navbar{
   position: fixed;
