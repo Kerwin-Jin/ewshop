@@ -1,23 +1,28 @@
 <template>
-    <li @mouseenter="isEnter = true" @mouseout="isEnter = false" :class='{"high-light":isEnter}' class="item">
-        <label>
-            <input type="checkbox" :checked="todo.done">{{todo.name}}{{isEnter}}
-            <button class="btn btn-danger" :style="{display:isEnter?'inline-block':'none'}" @click="delTodo(todo.id)">删除</button>
-        </label>
+    <li class="item">
+        <input type="checkbox" :checked="todo.done" @click="update(todo.id,$event)">{{todo.name}}
+        <button class="btn btn-danger del-btn" @click="delTodo(todo.id)">删除</button>
     </li>
 </template>
 
 <script>
 export default {
     name:'Item',
-    props:["todo"],
+    props:["todo","updateTodo"],
     data(){
         return{
             isEnter:false
         }
     },
     methods:{
-        
+        update(id,event){
+            console.log(id,event.target.checked);
+            const {checked} = event.target;
+            this.updateTodo(id,checked);
+        },
+        delTodo(id){
+            console.log(id)
+        }
     }
 }
 </script>
@@ -29,5 +34,16 @@ export default {
 }
 .item{
     height: 40px;
+}
+.item:hover{
+    background-color: #eee;
+    cursor: pointer;
+}
+.item:hover .del-btn{
+    display: inline-block;
+}
+.del-btn{
+    display: none;
+    float: right;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="container todo-wrap">
     <Header :addTodo="addTodo"/>
-    <List :todos="todos"/>
+    <List :todos="todos" :updateTodo="updateTodo"/>
     <Footer/>
   </div>
 </template>
@@ -32,6 +32,14 @@ export default {
     // 添加一个todo
     addTodo(todoObj){
       this.todos.unshift(todoObj);
+    },
+
+    // 修改一个todo
+    updateTodo(id,done){
+      this.todos = this.todos.map((todo)=>{
+        if(todo.id == id) return {...todo,done};
+        else return todo;
+      })
     }
   }
 }
