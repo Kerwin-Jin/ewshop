@@ -1,8 +1,8 @@
 <template>
   <div class="container todo-wrap">
     <Header :addTodo="addTodo"/>
-    <List :todos="todos" :updateTodo="updateTodo"/>
-    <Footer/>
+    <List :todos="todos" :updateTodo="updateTodo" :deleteTodo="deleteTodo"/>
+    <Footer :todos="todos" :updateAll="updateAll" :clearAll="clearAll"/>
   </div>
 </template>
 
@@ -12,19 +12,26 @@ import List from './components/List'
 import Footer from './components/Footer'
 export default {
   name:"App",
-  components:{
-    Header,
-    List,
-    Footer
-  },
+  components:{Header,List,Footer},
   data(){
+
+    let todos;
+    try {
+      // todos = JSON.parse(localStorage.getItem("todos") ) || [];
+      todos = JSON.parse(localStorage.getItem("todos")) || [];
+      console.log(todos);
+    } catch (error) {
+      alert("本地数据异常，数据将被重置！");
+      localStorage.removeItem("todos");
+      todos = [];
+    }
     return {
-      todos:[
-        {id:'001',name:'抽烟',done:true},
-        {id:'002',name:'喝酒',done:true},
-        {id:'003',name:'烫头',done:false},
-        {id:'004',name:'写代码',done:false}
-      ]
+      todos:todos
+    }
+  },
+  watch:{
+    todos(newValue){
+      localStorage.setItem('todos',JSON.stringify(newValue));
     }
   },
   methods:{
@@ -39,6 +46,25 @@ export default {
       this.todos = this.todos.map((todo)=>{
         if(todo.id == id) return {...todo,done};
         else return todo;
+      })
+    },
+
+    // 删除一个todo
+    deleteTodo(id){
+      this.todos = this.todos.filter(item=>{
+        return item.id!=id;
+      })
+    },
+    //updateAll
+    updateAll(done){
+      this.todos = this.todos.map(item=>{
+        return {...item,done}
+      })
+    },
+    // 清除已完成
+    clearAll(){
+      this.todos = this.todos.filter(item=>{
+        return !item.done;
       })
     }
   }

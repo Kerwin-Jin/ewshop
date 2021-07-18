@@ -8,7 +8,7 @@
 <script>
 export default {
     name:'Item',
-    props:["todo","updateTodo"],
+    props:["todo","updateTodo","deleteTodo"],
     data(){
         return{
             isEnter:false
@@ -21,7 +21,7 @@ export default {
             this.updateTodo(id,checked);
         },
         delTodo(id){
-            console.log(id)
+            this.deleteTodo(id);
         }
     }
 }
@@ -33,7 +33,12 @@ export default {
     cursor: pointer;
 }
 .item{
+    padding: 3px;
     height: 40px;
+    line-height: 40px;
+}
+.item input{
+    margin-right: 10px;
 }
 .item:hover{
     background-color: #eee;
