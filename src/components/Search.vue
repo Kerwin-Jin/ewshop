@@ -17,11 +17,18 @@ export default {
     },
     methods:{
       async search(){
+
+        this.$bus.$emit('get-data',{isFirst:false,isLoading:true,errMsg:'',users:[]});
+
         try {
+          if(!this.keyWord.trim()) return alert('请输入搜索关键字！');
+
           const resp = await axios.get("https://api.github.com/search/users",{params:{q:this.keyWord}});
           const {items} = resp.data;
-          console.log(items);
+          this.$bus.$emit('get-data',{isLoading:false,errMsg:'',users:items});
+
         } catch (error) {
+          this.$bus.$emit('get-data',{isLoading:false,errMsg:error.message,users:[]});
           console.log(error.message);
         }
       }
