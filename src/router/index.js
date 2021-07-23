@@ -4,12 +4,30 @@ Vue.use(VueRouter)
 
 import Home from "../pages/Home"
 import About from "../pages/About"
-
+import News from "../pages/News"
+import Message from "../pages/Message"
+import Detail from "../pages/Detail"
 const routes = {
     routes:[
         {
             path:'/home',
-            component:Home
+            component:Home,
+            children:[
+                {
+                    path:'message',
+                    component:Message,
+                    children:[
+                        {
+                            path:'detail',
+                            component:Detail
+                        }
+                    ]
+                },
+                {
+                    path:'news',
+                    component:News
+                }
+            ]
         },
         {
             path:'/about',
