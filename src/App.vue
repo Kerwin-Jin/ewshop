@@ -2,8 +2,8 @@
   <div id="app" class="container">
     <Header/>
     <div class="link">
-      <router-link active-class="active" to="/home" tag="a">Home</router-link>
-      <router-link active-class="active" to="/about" tag="a">About</router-link>
+      <router-link active-class="active" to="/home">Home</router-link>
+      <router-link active-class="active" to="/about">About</router-link>
     </div>
     <router-view>
       <Home/>
@@ -19,9 +19,6 @@ export default {
   name:"App",
   components:{
     Header,
-  },
-  mounted(){
-    console.log("@",this);
   }
 }
 </script>
