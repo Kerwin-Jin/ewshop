@@ -59,6 +59,7 @@ const router = new VueRouter(routes)
 // 路由守卫
 router.beforeEach((to,from,next)=>{
     console.log(to);
+    console.log(from);
     next();
 })
 
